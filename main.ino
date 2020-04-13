@@ -63,3 +63,33 @@ Serial.begin(9600);
   digitalWrite(ledRojo,LOW);
   
 }
+
+
+// motors
+
+void atras()
+{
+analogWrite(MI_pwm,v1);digitalWrite(MI_A,HIGH);digitalWrite(MI_B,LOW);analogWrite(MD_pwm,v2);digitalWrite(MD_A,HIGH);digitalWrite(MD_B,LOW);digitalWrite(stby,HIGH);
+}
+
+void avanzar()
+{
+analogWrite(MI_pwm,v1);digitalWrite(MI_A,LOW);digitalWrite(MI_B,HIGH);analogWrite(MD_pwm,v2);digitalWrite(MD_A,LOW);digitalWrite(MD_B,HIGH);digitalWrite(stby,HIGH);
+}
+
+
+void rotarIzq()
+{
+ analogWrite(MI_pwm,v1);digitalWrite(MI_A,HIGH);digitalWrite(MI_B,LOW);analogWrite(MD_pwm,v2);digitalWrite(MD_A,LOW);digitalWrite(MD_B,HIGH);digitalWrite(stby,HIGH);
+}
+
+
+void rotarDer()
+{ 
+ analogWrite(MI_pwm,v1);digitalWrite(MI_A,LOW);digitalWrite(MI_B,HIGH);analogWrite(MD_pwm,v2);digitalWrite(MD_A,HIGH);digitalWrite(MD_B,LOW);digitalWrite(stby,HIGH);
+}
+
+ void alto()
+{
+ analogWrite(MI_pwm,v1);digitalWrite(MI_A,LOW);digitalWrite(MI_B,LOW);analogWrite(MD_pwm,v2);digitalWrite(MD_A,LOW);digitalWrite(MD_B,LOW);digitalWrite(stby,HIGH);  
+}
