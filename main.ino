@@ -33,3 +33,33 @@ int ledRojo=4;
 int ledAzul=2;
 int iniciar=A4;
 int a,b,c,d,e,f;
+
+void setup() {
+  
+Serial.begin(9600);
+
+  pinMode(ladoIzq,INPUT);
+  pinMode(ladoDer,INPUT);
+  pinMode(lineaA,INPUT);
+  pinMode(lineaB,INPUT);
+  pinMode(iniciar,INPUT);
+  pinMode(ledRojo,OUTPUT);
+  pinMode(ledAzul,OUTPUT);
+
+  //pinMode(ultrasonico,INPUT);
+  pinMode(MI_pwm,OUTPUT);
+  pinMode(MI_A,OUTPUT);
+  pinMode(MI_B,OUTPUT);
+  pinMode(MD_pwm,OUTPUT);
+  pinMode(MD_A,OUTPUT);
+  pinMode(MD_B,OUTPUT);
+  pinMode(stby,OUTPUT);
+  pinMode(ledRojo,OUTPUT);
+  pinMode(ledAzul,OUTPUT);
+
+
+  digitalWrite(ledRojo,HIGH);
+  delay(3000);
+  digitalWrite(ledRojo,LOW);
+  
+}
