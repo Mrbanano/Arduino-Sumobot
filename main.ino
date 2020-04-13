@@ -93,3 +93,88 @@ void rotarDer()
 {
  analogWrite(MI_pwm,v1);digitalWrite(MI_A,LOW);digitalWrite(MI_B,LOW);analogWrite(MD_pwm,v2);digitalWrite(MD_A,LOW);digitalWrite(MD_B,LOW);digitalWrite(stby,HIGH);  
 }
+
+
+
+
+void hayalgo(){
+  e =sonar.ping_cm();
+  if(e<15 ){f=0;}
+  else{f=1;}
+  
+  }
+void loop() {
+
+  
+  
+v1=120;
+v2=120;
+//1 significa no hay nada 
+// 0 encontre algo 
+  
+
+  a=digitalRead(ladoIzq);
+  b=digitalRead(ladoDer);
+  c=digitalRead(lineaA);
+  d=digitalRead(lineaB);
+  
+
+   digitalWrite(ledAzul,HIGH);
+ 
+
+Serial.print(a);Serial.print(b);Serial.print("\n \n");
+hayalgo();
+if(c==1)   // Si la lectura del infrarrojo #1 es 0, entonces se cumplira una de las siguientes condiciones:
+{
+  if(d==1)  // Si la lectura del infrarrojo #2 es 0, es decir los dos sensores estan sobre la linea negra, entonces los dos motores avanzaran en linea recta.
+      {
+        //algo enfrente = algo izquierda = algo derecha 
+        if      (f ==0 && a==0 && b==0){avanzar();}
+        //algo enfrente = algo izquierda = nada derecha
+        else if (f ==0 && a==0 && b==1){v1=200;v2=200;rotarDer();delay(250);v1=255;v2=255;avanzar();}
+        //algo enfrente = nada izquierda = algo derecha
+        else if (f ==0 && a==1 && b==0){v1=200;v2=200;rotarIzq();delay(250);v1=255;v2=255;avanzar();}
+        //algo enfrente = nada izquierda = nada derecha
+        else if (f ==0 && a==1 && b==1){v1=255;v2=255; avanzar();}
+        //nada enfrente = algo izquierda = algo derecha
+        else if (f ==1 && a==0 && b==0){avanzar();}
+        //nada enfrente = algo izquierda = nada derecha
+        else if (f ==1 && a==0 && b==1){v1=200;v2=200;rotarDer();}
+        //nada enfrente = nada izquierda = algo derecha
+        else if (f ==1 && a==1 && b==0){v1=200;v2=200;rotarIzq();}
+        //nada enfrente = nada izquierda = nada derecha
+        else if (f ==1 && a==1 && b==1){avanzar();}
+        
+      }
+  else // Si la lectura del infrarrojo #2 es 1, el sensor#1 esta sobre la linea negra y el sensor#2 esta fuera de la linea negra, entonces solo una rueda gira y esto causara el giro.
+      {
+        atras();
+        delay(500);
+        rotarIzq(); 
+        delay(350);
+      }
+}
+else // Si la lectura del infrarrojo #1 no es 0, sera 1, se daran las siguientes posibilidades:
+{
+  if(d==0)  // Como el sensor#1 esta fuera de la linea negra y el sensor#2 esta sobre la linea negra, entonces solo una rueda gira y esto causara el giro.
+      {
+      atras();
+      delay(500);
+      rotarDer();
+      delay(350);
+      }
+   else
+   { // si ambos sensores dan lectura 1, los dos estan fuera de la linea negra, para que vuelva a su trayectoria tiene que retroceder.
+      atras();
+      delay(500);
+      rotarDer();
+      delay(250);
+  } 
+} 
+
+
+  
+
+}
+  
+ 
